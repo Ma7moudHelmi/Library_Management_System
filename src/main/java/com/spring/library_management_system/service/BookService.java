@@ -3,6 +3,7 @@ package com.spring.library_management_system.service;
 import com.spring.library_management_system.repository.BookRepository;
 import com.spring.library_management_system.model.Book;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class BookService {
     @Transactional
     public ResponseEntity<Book> createBook(Book book) {
         Book createdBook = bookRepository.save(book);
-        return ResponseEntity.status(201).body(createdBook);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
     }
 
     @Transactional

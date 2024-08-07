@@ -4,6 +4,7 @@ import com.spring.library_management_system.model.Patron;
 import com.spring.library_management_system.repository.PatronRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class PatronService {
     @Transactional
     public ResponseEntity<Patron> createPatron(Patron patron) {
         Patron createdPatron = patronRepository.save(patron);
-        return ResponseEntity.status(201).body(createdPatron);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPatron);
     }
 
     @Transactional
