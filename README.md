@@ -24,7 +24,7 @@ This project is a Spring Boot application that provides a library management sys
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Ma7moudHelmi/Library_Management_System.git
-   cd library-management-system
+   cd Library-Management-System
    ```
 
 2. **Build the project**:
