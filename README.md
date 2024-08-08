@@ -1,6 +1,6 @@
 ## Library Management System
 
-This project is a Spring Boot application that provides a library management system with RESTful API endpoints for managing books, patrons, and borrowing records.
+This project is a Spring Boot application that provides a library management system with RESTful API endpoints for managing books, patrons, and borrowing records. It includes logging using AOP.
 
 ### Table of Contents
 
@@ -10,6 +10,7 @@ This project is a Spring Boot application that provides a library management sys
     - [Book Management](#book-management)
     - [Patron Management](#patron-management)
     - [Borrowing](#borrowing)
+- [Logging](#logging)
 - [Testing](#testing)
 
 ### Requirements
@@ -122,6 +123,9 @@ This project is a Spring Boot application that provides a library management sys
 - **PUT /api/return/{bookId}/patron/{patronId}**: Record the return of a borrowed book by a patron.
     - Example: `http://localhost:8080/api/return/1/patron/1`
 
+### Logging
+
+Logging is implemented using Aspect Oriented Programming (AOP). Logs for method calls, exceptions and performance metrics are recorded in the application logs. The logs can be found in the `logs/library-management-system.log` file.
     
 ### Testing
 
