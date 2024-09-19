@@ -39,6 +39,7 @@ public class BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book with id " + id + " not found"));
 
+        System.out.println(book);
         book.setTitle(bookDetails.getTitle());
         book.setAuthor(bookDetails.getAuthor());
         book.setPublicationYear(bookDetails.getPublicationYear());

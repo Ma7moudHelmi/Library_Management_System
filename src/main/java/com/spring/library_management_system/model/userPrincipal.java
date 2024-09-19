@@ -11,25 +11,25 @@ import java.util.List;
 
 public class userPrincipal implements UserDetails {
 
-    User user ;
+    Patron patron ;
 
-    public userPrincipal(User user){
-        this.user = user;
+    public userPrincipal(Patron patron){
+        this.patron = patron;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRoles()));
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+patron.getRoles()));
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return patron.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return patron.getUsername();
     }
 
 

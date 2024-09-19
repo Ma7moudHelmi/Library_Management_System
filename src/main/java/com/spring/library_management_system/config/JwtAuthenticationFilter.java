@@ -38,15 +38,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String userName = null;
-        String role=null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            try{
+            try {
                 token = authHeader.substring(7);
                 userName = jwtService.extractUserName(token);
-            }catch (JwtException ex){
+            } catch (JwtException ex) {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.setContentType("application/json");
-                response.getWriter().write("{\"error\": \"Invalid JWT token\", \"message\": \"" + ex.getMessage() + "\"}");            }
+                response.getWriter().write("{\"error\": \"Invalid JWT token\", \"message\": \"" + ex.getMessage() + "\"}");
+            }
 
         }
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {

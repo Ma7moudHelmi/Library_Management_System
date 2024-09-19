@@ -31,16 +31,20 @@ public class BookController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Book>  createBook(@Valid @RequestBody Book book) {
         return bookService.createBook(book);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Book> updateBook(@PathVariable @Min(1) Long id, @Valid @RequestBody Book bookDetails) {
+        System.out.println(id+" "+bookDetails);
         return bookService.updateBook(id,bookDetails);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteBook(@PathVariable @Min(1) Long id) {
         return bookService.deleteBook(id);
     }

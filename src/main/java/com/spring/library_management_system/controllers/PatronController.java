@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class PatronController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Patron> getPatronById(@PathVariable @Min(1) Long id){
         return patronService.getPatronById(id);
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Patron> createPatron(@Valid @RequestBody Patron patron){
         return patronService.createPatron(patron);
     }
@@ -39,6 +42,7 @@ public class PatronController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePatron(@PathVariable Long id){
         return patronService.deletePatron(id);
     }

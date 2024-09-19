@@ -1,6 +1,6 @@
 package com.spring.library_management_system.controllers;
 
-import com.spring.library_management_system.model.User;
+import com.spring.library_management_system.model.Patron;
 import com.spring.library_management_system.service.AuthenticationUsers;
 import com.spring.library_management_system.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +33,18 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return authenticationUsers.saveUser(user);
+    public ResponseEntity<Patron> register(@RequestBody Patron patron) {
+        return authenticationUsers.saveUser(patron);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<String> login(@RequestBody Patron patron) {
         try {
 
            Authentication authentication= authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+                    .authenticate(new UsernamePasswordAuthenticationToken(patron.getUsername(), patron.getPassword()));
             System.out.println(authentication.getAuthorities());
-            return ResponseEntity.ok(jwtService.generateToken(user.getUsername()));
+            return ResponseEntity.ok(jwtService.generateToken(patron.getUsername()));
         } catch (AuthenticationException ex) {
             throw new AuthenticationException("") {};
         }

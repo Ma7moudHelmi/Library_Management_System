@@ -62,9 +62,6 @@ public class SecurityConfig {
 
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(customAuthenticationEntryPoint())
-                )
-                .exceptionHandling(exception -> exception
-                        .accessDeniedHandler(customAccessDeniedHandler())
                 );
         return http.build();
     }
