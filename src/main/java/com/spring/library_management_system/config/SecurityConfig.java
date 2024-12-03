@@ -70,7 +70,8 @@ public class SecurityConfig {
     public AuthenticationEntryPoint customAuthenticationEntryPoint() {
         return (request, response, authException) -> {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write("\nError: Unauthorized access");
+            response.setContentType("application/json");
+            response.getWriter().write("{\"message\":" + "\"Error: Unauthorized access\"}");
         };
     }
 

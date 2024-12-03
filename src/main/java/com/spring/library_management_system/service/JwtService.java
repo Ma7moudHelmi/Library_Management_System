@@ -21,6 +21,7 @@ public class JwtService {
 
     SecretKey key = Jwts.SIG.HS256.key().build();
 
+
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
 //        claims.put("role", );

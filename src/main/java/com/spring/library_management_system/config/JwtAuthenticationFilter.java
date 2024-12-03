@@ -2,20 +2,13 @@ package com.spring.library_management_system.config;
 
 import com.spring.library_management_system.service.AppUserDetailsServices;
 import com.spring.library_management_system.service.JwtService;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -39,14 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = null;
         String userName = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            try {
-                token = authHeader.substring(7);
-                userName = jwtService.extractUserName(token);
-            } catch (JwtException ex) {
-                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                response.setContentType("application/json");
-                response.getWriter().write("{\"error\": \"Invalid JWT token\", \"message\": \"" + ex.getMessage() + "\"}");
-            }
+            token = authHeader.substring(7);
+            userName = jwtService.extractUserName(token);
 
         }
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
