@@ -18,7 +18,7 @@ public class AuthenticationUsers {
 
     public ResponseEntity<Patron> saveUser(Patron patron){
         patron.setPassword(bCryptPasswordEncoder.encode(patron.getPassword()));
-        patron.setRoles("USER");
+        patron.setPatronRole("USER");
 
         Patron saveUser = patronRepository.save(patron);
 

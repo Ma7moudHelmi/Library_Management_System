@@ -18,21 +18,24 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 public class Patron {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Name is Required")
     private String name;
 
-    @NotNull(message = "username is required")
+    @NotBlank(message = "username is Required")
     private String username;
 
-    @NotNull(message = "password is required")
+    @NotBlank(message = "password is Required")
     private String password;
 
-    private String roles;
+    @NotBlank(message = "Role is Required")
+    private String patronRole;
 
     @NotBlank(message = "Contact info is Required")
     @Email(message = "Contact info should be a valid email address")
-    private String contactInfo;
+    private String emailAddress;
 }

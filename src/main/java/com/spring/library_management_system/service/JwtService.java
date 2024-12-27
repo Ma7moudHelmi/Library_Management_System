@@ -1,12 +1,15 @@
 package com.spring.library_management_system.service;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +22,6 @@ public class JwtService {
     @Value("#{environment.getProperty('JWT_SECRET_Key')}")
     private String SECRET;
 
-    SecretKey key = Jwts.SIG.HS256.key().build();
-
-
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
 //        claims.put("role", );
@@ -30,7 +30,11 @@ public class JwtService {
                 .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(key).compact();
+                .signWith(secretKeyBean(),Jwts.SIG.HS256).compact();
+    }
+
+    public SecretKey secretKeyBean() {
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
     public String extractUserName(String token) {
@@ -44,7 +48,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .verifyWith(key)
+                .verifyWith(secretKeyBean())
                 .build().parseSignedClaims(token).getPayload();
     }
 
