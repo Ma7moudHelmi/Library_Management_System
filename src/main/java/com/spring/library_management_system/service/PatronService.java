@@ -42,7 +42,7 @@ public class PatronService {
                 .orElseThrow(() -> new EntityNotFoundException("Patron with id " + id + " not found"));
 
         patron.setName(patronDetails.getName());
-        patron.setContactInfo(patronDetails.getContactInfo());
+        patron.setEmailAddress(patronDetails.getEmailAddress());
         return ResponseEntity.ok(patronRepository.save(patron));
     }
 

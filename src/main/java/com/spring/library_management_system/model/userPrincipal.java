@@ -4,22 +4,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class userPrincipal implements UserDetails {
 
-    Patron patron ;
+    Patron patron;
 
-    public userPrincipal(Patron patron){
+    public userPrincipal(Patron patron) {
         this.patron = patron;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+patron.getRoles()));
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + patron.getPatronRole()));
     }
 
     @Override
@@ -30,6 +28,10 @@ public class userPrincipal implements UserDetails {
     @Override
     public String getUsername() {
         return patron.getUsername();
+    }
+
+    public long getId() {
+        return patron.getId();
     }
 
 
